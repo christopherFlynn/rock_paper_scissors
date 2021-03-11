@@ -5,10 +5,10 @@
     margin: 10px;
     position: absolute;
     text-align: center;
-        top: 40%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%)
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
   }
   .buttons {
     display: inline-flex;
@@ -31,14 +31,19 @@
     <button id="scissors">Scissors</button>
   </div>
   <div id="result">Hello World!</div>
+  <div id="wins">You've won 0 times, and the computer has won 0 times</div>
 </body>
 
 <script>
+  let winsPlayer = 0,
+    winsComp = 0;
   const buttons = document.querySelectorAll("button");
   const resultDisplay = document.getElementById("result");
+  const winsDisplay = document.getElementById("wins");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       resultDisplay.textContent = playRound(button.id, computerPlay());
+      winsDisplay.textContent = 'You\'ve won ' + winsPlayer + ' times, and the computer has won ' + winsComp + ' times'
     });
   });
 
@@ -52,24 +57,30 @@
       if (computerSelection == 0) {
         return "Tie! Rock ties with Rock";
       } else if (computerSelection == 1) {
+        ++winsPlayer;
         return "You win! Rock beats Scissors";
       } else {
+        ++winsComp;
         return "You lose! Paper beats Rock";
       }
     } else if (choice == "P") {
       if (computerSelection == 0) {
         return "Tie! Paper ties with Paper";
       } else if (computerSelection == 1) {
+        ++winsPlayer;
         return "You win! Paper beats Rock";
       } else {
+        ++winsComp;
         return "You lose! Scissors beats Paper";
       }
     } else if (choice == "S") {
       if (computerSelection == 0) {
         return "Tie! Scissors ties with Scissors";
       } else if (computerSelection == 1) {
+        ++winsPlayer;
         return "You win! Scissors beats Paper";
       } else {
+        ++winsComp;
         return "You lose! Rock beats Scissors";
       }
     } else {
